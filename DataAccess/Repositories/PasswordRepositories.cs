@@ -11,13 +11,13 @@ namespace PracticalWork.DataAccess.Repositories
         {
             _context = context;
         }
-        public async Task<List<UserPasswords>> GetUserTasksAsync(string? username)
+        public async Task<List<UserPasswords>> GetPasswordAsync(string? username)
         {
             return await _context.UserPasswords
                 .Where(ut => ut.UserIdFk.UserName == username).ToListAsync();
         }
 
-        public async Task AddTaskAsync(string? username, UserPasswords? passwords)
+        public async Task AddPasswordAsync(string? username, UserPasswords? passwords)
         {
             var user = await _context.Users.FirstAsync(u => u.UserName == username);
            
@@ -36,8 +36,18 @@ namespace PracticalWork.DataAccess.Repositories
         {
           
                 var res =await _context.UserPasswords
-                .FirstAsync(r => r.PasswordId == id);
+                .FirstOrDefaultAsync(r => r.PasswordId == id);
             return res;
+        }
+        public async Task UpdatePasswordAsync(UserPasswords passwords)
+        {
+            var user = await FindPasswordByIdAsync(passwords.PasswordId);
+
+            user.UserName = passwords.UserName;
+            user.UserPassword = passwords.UserPassword;
+
+
+            await _context.SaveChangesAsync();
         }
         public async Task DeletePasswordAsync(int id)
         {
@@ -45,6 +55,10 @@ namespace PracticalWork.DataAccess.Repositories
              _context.UserPasswords?.Remove(res);
             await _context.SaveChangesAsync();
             
+        }
+        public async Task<bool> PasswordExists(int id)
+        {
+            return await _context.UserPasswords.AnyAsync(e => e.PasswordId == id);
         }
     }
 }

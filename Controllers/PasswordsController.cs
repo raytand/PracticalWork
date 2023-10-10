@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PracticalWork.DataAccess.Model;
 using PracticalWork.DataAccess.Repositories;
 namespace PracticalWork.Controllers
@@ -10,7 +11,7 @@ namespace PracticalWork.Controllers
     {
         private IPasswordRepositories Repositories { get; }
         private readonly UserManager<User>? _userManager;
-        public PasswordsController(UserManager<User>? userManager,IPasswordRepositories _Repositories)
+        public PasswordsController(UserManager<User>? userManager, IPasswordRepositories _Repositories)
         {
             Repositories = _Repositories;
             userManager = _userManager;
@@ -19,9 +20,9 @@ namespace PracticalWork.Controllers
         public async Task<IActionResult> Index()
         {
             string? user = HttpContext.User.Identity?.Name;
-            var tasks = await Repositories.GetUserTasksAsync(user);
-            return View(tasks); 
-           
+            var tasks = await Repositories.GetPasswordAsync(user);
+            return View(tasks);
+
         }
         [HttpGet]
         public IActionResult Add()
@@ -31,13 +32,14 @@ namespace PracticalWork.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(PasswordsViewModel model)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
-                await Repositories.AddTaskAsync(HttpContext.User.Identity?.Name, (UserPasswords)model);
+                await Repositories.AddPasswordAsync(HttpContext.User.Identity?.Name, (UserPasswords)model);
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
         }
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) { return NotFound(); }
@@ -52,6 +54,45 @@ namespace PracticalWork.Controllers
             await Repositories.DeletePasswordAsync(id);
             return Redirect("/Passwords/Index");
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null) { return NotFound(); }
+            var user = await Repositories.FindPasswordByIdAsync(id.Value);
+            if (id == null) { return NotFound(); }
+            return View(user);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, PasswordsViewModel model)
+        {
+            if (id != model.PasswordId)
+            {
+                return NotFound();
+            }
 
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await Repositories.UpdatePasswordAsync(model);
+                    return Redirect("/Passwords/Index");
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!await Repositories.PasswordExists(model.PasswordId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+            }
+            return View(model);
+        }
     }
 }

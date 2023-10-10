@@ -26,6 +26,9 @@
                     @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
+                <b><a asp-action="Edit" asp-route-id="@item.PasswordId">Edit</a></b>
+                </td>
+                <td>
                 <b><a asp-action="Delete" asp-route-id="@item.PasswordId">Delete</a></b>
                 </td>
             </tr>
