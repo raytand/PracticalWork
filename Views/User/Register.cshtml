@@ -1,0 +1,53 @@
+﻿@model PracticalWork.DataAccess.Model.RegisterViewModel;
+@{
+    Layout = null;
+}
+
+
+<html>
+    <head>
+    @await Html.PartialAsync("MetatagsPartial")
+        @await Html.PartialAsync("CssPartial")
+    
+
+    </head>
+    <body>
+    <h2>Register</h2>
+
+    <form asp-action="Register" asp-controller="User" asp-antiforgery="true" method="post" >
+        <div class="form-group">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PasswordConfirmation"></label>
+            <input asp-for= "PasswordConfirmation" type="password" class="form-control" />
+            <span asp-validation-for="PasswordConfirmation" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</body>
+ 
+
+</html>

@@ -1,0 +1,38 @@
+﻿@model List<PracticalWork.DataAccess.Model.UserPasswords>
+
+@{
+    Layout = "_Layout";
+}
+<table>
+    
+        <tr>
+            <td>
+               <b>Password</b>
+            </td>
+            <td>
+                <b>User name or email</b>
+            </td>
+            
+            
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserPassword)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                <b><a asp-action="Delete" asp-route-id="@item.PasswordId">Delete</a></b>
+                </td>
+            </tr>
+        }
+    
+</table>
+<a asp-action="Add">
+
+    <b>Add password</b>
+</a>

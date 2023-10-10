@@ -1,0 +1,36 @@
+﻿
+@model PracticalWork.DataAccess.Model.LoginModel
+@{
+    
+    Layout = null;
+}
+<h2>Login</h2>
+<html>
+    <head>
+        @await Html.PartialAsync("MetatagsPartial")
+        @await Html.PartialAsync("CssPartial")
+    </head>
+    <body>
+    <form asp-action="Login" asp-controller="User" asp-antiforgery="true"  method="post">
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+       
+        <div class="btn btn-primary">
+            <a asp-action="Register" asp-controller="User">
+                <input type="button" value="Register" />
+            </a>
+        </div>
+    </form>
+</body>
+</html>
