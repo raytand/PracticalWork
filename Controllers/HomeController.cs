@@ -3,18 +3,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace PracticalWork.Controllers
 {
+    
+    [Authorize]
     public class HomeController : Controller
     {
-        [Authorize]
+        
         public IActionResult Index()
         {
             return View();
         }
-        [Authorize]
+        
         public IActionResult Contacts()
         {
             return View();
         }
-
+    
     }
 }

@@ -20,7 +20,7 @@ namespace PracticalWork
             services.AddDbContext<CWContext>(options =>
     options.UseSqlite(Configuration.GetConnectionString("DefaultConection")));
 			services.AddIdentity<User, IdentityRole>().AddRoles<IdentityRole>().AddEntityFrameworkStores<CWContext>();
-             //HERE IS POSIBLE MISTATAKE !!!!!
+           
 			 
             services.ConfigureApplicationCookie(options =>
             {

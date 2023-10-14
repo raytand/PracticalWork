@@ -1,6 +1,7 @@
 ﻿using PracticalWork.DataAccess.Model;
 using PracticalWork.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
+using PracticalWork.Migrations;
 
 namespace PracticalWork.DataAccess.Repositories
 {
@@ -59,6 +60,15 @@ namespace PracticalWork.DataAccess.Repositories
         public async Task<bool> PasswordExists(int id)
         {
             return await _context.UserPasswords.AnyAsync(e => e.PasswordId == id);
+        }
+        public async Task<User?> FindUserByIdAsync(string? id)
+        {
+            if (id == null)
+            {
+                return null;
+            }
+
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
     }
 }
