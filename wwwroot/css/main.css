@@ -110,9 +110,9 @@ input, select, textarea {
 		-webkit-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 		-ms-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 		transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
-		color: #37c0fb;
+		color: #1909a8;
 		text-decoration: none;
-		border-bottom: dotted 1px;
+		
 	}
 
 		a:hover {
@@ -2532,8 +2532,8 @@ input, select, textarea {
 	#header {
 		text-align: center;
 		padding: 3em 0 0 0;
-		background-color: #fff;
-		background-image: url("images/bg02.png"), url("images/bg02.png"), url("images/bg01.png");
+		background-color: #c0c0c0;
+		
 		background-position: top left,					top left,					top left;
 		background-size: 100% 6em,					100% 6em,					auto;
 		background-repeat: no-repeat,					no-repeat,					repeat;
@@ -3063,7 +3063,7 @@ input, select, textarea {
 				box-shadow: 0 4px 0 0 #37c0fb;
 			}
 
-				#titleBar .title {
+				/*#titleBar .title {
 					display: block;
 					position: relative;
 					font-weight: 600;
@@ -3075,7 +3075,7 @@ input, select, textarea {
 					#titleBar .title em {
 						font-style: normal;
 						font-weight: 300;
-					}
+					}*/
 
 				#titleBar .toggle {
 					text-decoration: none;

@@ -25,12 +25,13 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Login</button>
-       
-        <div class="btn btn-primary">
-            <a asp-action="Register" asp-controller="User">
-                <input type="button" value="Register" />
-            </a>
-        </div>
+
+
+        <button  asp-controller ="user" asp-action ="Register" type="button" value="Register">
+            
+                <a href = "/user/register">Register</a>
+            
+        </button>
     </form>
 </body>
 </html>

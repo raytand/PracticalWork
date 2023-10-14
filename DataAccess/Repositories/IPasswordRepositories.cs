@@ -11,5 +11,6 @@ namespace PracticalWork.DataAccess.Repositories
         Task DeletePasswordAsync(int id);
         Task UpdatePasswordAsync(UserPasswords passwords);
         Task<bool> PasswordExists(int id);
+        Task<User?> FindUserByIdAsync(string? id);
     }
 }
