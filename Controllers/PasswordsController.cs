@@ -20,8 +20,8 @@ namespace PracticalWork.Controllers
         public async Task<IActionResult> Index()
         {
             string? user = HttpContext.User.Identity?.Name;
-            var tasks = await Repositories.GetPasswordAsync(user);
-            return View(tasks);
+            var result = await Repositories.GetPasswordAsync(user);
+            return View(result);
 
         }
         [HttpGet]
